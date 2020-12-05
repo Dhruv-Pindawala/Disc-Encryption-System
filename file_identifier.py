@@ -24,5 +24,7 @@ buffersize = 64 * 1024
 
 if action == 'e' and file_type != "None" and file_type != 'directory':
     pyAesCrypt.encryptFile(file_input, file_input+".aes", password, buffersize)
+    os.remove(file_input)
 elif action == 'd' and file_type != "None" and file_type != 'directory':
     pyAesCrypt.decryptFile(file_input, file_input[:-4], password, buffersize)
+    os.remove(file_input)
