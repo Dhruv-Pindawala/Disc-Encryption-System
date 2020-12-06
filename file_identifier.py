@@ -6,7 +6,6 @@ import getpass
 file_input = input("=> Please enter the GLOBAL LOCATION of the file : ")
 file_type = "None"
 
-
 try:
     if os.path.isfile(file_input):
         file_type_initial = magic.from_file(file_input, mime = True)
@@ -22,8 +21,6 @@ try:
 except:
     print("=> Please enter a valid file location.")
 
-
-
 def file__action(file1, action1, password1, buffersize1):
     if action == action1 and file_type != "None" and file_type != 'directory':
         pyAesCrypt.encryptFile(file1, file1+".aes", password1, buffersize1)
@@ -32,19 +29,20 @@ def file__action(file1, action1, password1, buffersize1):
         pyAesCrypt.decryptFile(file1, file1[:-4], password1, buffersize1)
         os.remove(file_input)
 
-def dir_action(dir1, action1, password1, buffersize1):
-    working_dir = dir1
+def dir_action(working__dir, action1, password1, buffersize1):
     dir_list = os.listdir(working_dir)
     for new_file in dir_list:
         if os.path.isfile(working_dir + new_file):
             file__action(working_dir + new_file, action1, password1, buffersize1)
+        elif os.path.isdir(working_dir + new_file):
+            dir_action(working_dir + new_file, action1, password1, buffersize1)
 
 try:
     if os.path.isfile(file_input):
         file__action(file_input, action, password, buffersize)
     elif os.path.isdir(file_input):
+        dir_action(file_input, action, password, buffersize)
         
-
 except:
     print("=> Sorry for the inconvenience faced. We are unable to process your input.......")
     print("=> Please check if you have given all the asked inputs clearly and try to run the program once again..")
