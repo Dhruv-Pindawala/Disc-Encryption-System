@@ -31,10 +31,21 @@ def file__action(file1, action1, password1, buffersize1):
     elif action == action1 and file_type != "None" and file_type != 'directory':
         pyAesCrypt.decryptFile(file1, file1[:-4], password1, buffersize1)
         os.remove(file_input)
+
+def dir_action(dir1, action1, password1, buffersize1):
+    working_dir = dir1
+    dir_list = os.listdir(working_dir)
+    for new_file in dir_list:
+        if os.path.isfile(working_dir + new_file):
+            file__action(working_dir + new_file, action1, password1, buffersize1)
+
 try:
     if os.path.isfile(file_input):
         file__action(file_input, action, password, buffersize)
+    elif os.path.isdir(file_input):
+        
 
 except:
     print("=> Sorry for the inconvenience faced. We are unable to process your input.......")
+    print("=> Please check if you have given all the asked inputs clearly and try to run the program once again..")
     print("=> please create a new issue in the repository and we will try to sort it as soon as possible!!!!!!!")
