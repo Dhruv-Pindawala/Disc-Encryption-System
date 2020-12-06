@@ -1,6 +1,7 @@
 import magic
 import os
 import pyAesCrypt
+import getpass
 
 file_input = input("=> Please enter the GLOBAL LOCATION of the file : ")
 file_type = "None"
@@ -19,7 +20,7 @@ except:
     print("=> Please enter a valid file location.")
 
 action = input('=> what action do you want to take? Press E to encrypt or D to decrypt : ').lower()
-password = input("=> Please enter the PASSWORD : ")
+password = getpass.getpass("=> Please enter the PASSWORD : ")
 buffersize = 64 * 1024
 
 if action == 'e' and file_type != "None" and file_type != 'directory':
