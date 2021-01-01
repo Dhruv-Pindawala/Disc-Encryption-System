@@ -2,9 +2,12 @@ import os
 import pyAesCrypt
 import getpass
 
-input_file = input("Please provide the global location of the file/folder you want to process : ")
+print("")
+input_file = input("=> Please provide the global location of the file/folder you want to process : ")
+print("")
 input_operation = input("=> What action do you want to take? Press E to encrypt or D to decrypt : ").lower()[0]
-input_password = getpass.getpass("Please enter the password you want to use : ")
+print("")
+input_password = getpass.getpass("=> Please enter the password you want to use : ")
 buffsize = 64 * 1024
 
 if os.path.isfile(input_file):
