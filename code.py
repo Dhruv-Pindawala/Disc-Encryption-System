@@ -2,6 +2,8 @@ import os
 import pyAesCrypt
 import getpass
 
+
+script_loc = os.path.realpath(__file__)
 print("")
 input_file = input("=> Please provide the global location of the file/folder you want to process : ")
 print("")
@@ -17,7 +19,7 @@ def folder_action(folder_loc):
             present_file = os.path.join(folder_loc, i)
             if os.path.isdir(present_file):
                 folder_action(present_file)
-            elif os.path.isfile(present_file):
+            elif os.path.isfile(present_file) and present_file != script_loc:
                 if input_operation == "e":
                     pyAesCrypt.encryptFile(present_file, present_file + ".aes", input_password, buffsize)
                     os.remove(present_file)
@@ -28,7 +30,7 @@ def folder_action(folder_loc):
                     except:
                         print("=> PLEASE ENTER THE CORRECT PASSWORD")
 
-if os.path.isfile(input_file):
+if os.path.isfile(input_file) and present_file != script_loc:
     if input_operation == "e":
         pyAesCrypt.encryptFile(input_file, input_file + ".aes", input_password, buffsize)
         os.remove(input_file)
