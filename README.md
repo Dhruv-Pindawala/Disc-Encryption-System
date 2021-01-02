@@ -1,6 +1,7 @@
 # DISC ENCRYPTION SCRIPT
 
 A script that can be used to encrypt or decrypt any file or folder.
+The cryptographic algorithm used in the script is AES.
 In case of dealing with a file, it would directly encrypt the file. Whereas, when we will deal with a directory or a folder, the script will operate over every content of the folder individually. It will deal with the sub-folders in the same way, i.e., operating over its content individually. You can enter a folder or subfolder but you won't be able to read the file contents.
 
 ## Note
