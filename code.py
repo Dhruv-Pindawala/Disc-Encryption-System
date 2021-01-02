@@ -15,7 +15,18 @@ def folder_action(folder_loc):
     if len(folder_content) > 0:
         for i in folder_content:
             present_file = os.path.join(folder_loc, i)
-            print(present_file)
+            if os.path.isdir(present_file):
+                folder_action(present_file)
+            elif os.path.isfile(present_file):
+                if input_operation == "e":
+                    pyAesCrypt.encryptFile(present_file, present_file + ".aes", input_password, buffsize)
+                    os.remove(present_file)
+                elif input_operation == "d":
+                    try:
+                        pyAesCrypt.decryptFile(present_file, present_file[:-4], input_password, buffsize)
+                        os.remove(present_file)
+                    except:
+                        print("=> PLEASE ENTER THE CORRECT PASSWORD")
 
 if os.path.isfile(input_file):
     if input_operation == "e":
@@ -26,6 +37,7 @@ if os.path.isfile(input_file):
             pyAesCrypt.decryptFile(input_file, input_file[:-4], input_password, buffsize)
             os.remove(input_file)
         except:
-            print("PLEASE ENTER THE CORRECT PASSWORD")
+            print("=> PLEASE ENTER THE CORRECT PASSWORD")
 
-folder_action(input_file)
+elif os.path.isdir(input_file):
+    folder_action(input_file)
